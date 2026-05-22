@@ -1,6 +1,20 @@
 {
-    "title":"网站的大标题",
-    "subTitle":"网站的小标题，可以引用一些名人名言",
-    "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
-    "GMEEK_VERSION":"last"
+    "title": "Shaobo Zhang",
+    "subTitle": "Events, Memos & Daily",
+    "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
+    "GMEEK_VERSION": "last",
+    "displayTitle": "Shaobo Zhang",
+    "homeUrl": "https://ZS-robot.github.io",
+    "email": "<your-email@domain.com>",
+    "startSite": "05/23/2026",
+    "onePageListNum": 30,
+    "singlePage": ["about", "events"],
+    "i18n": "EN",
+    "themeMode": "manual",
+    "dayTheme": "light",
+    "nightTheme": "dark_colorblind",
+    "urlMode": "issue",
+    "showPostSource": 0,
+    "rssSplit": "sentence",
+    "bottomText": "© 2026 Shaobo Zhang. All Rights Reserved."
 }
