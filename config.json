@@ -5,7 +5,7 @@
     "GMEEK_VERSION": "last",
     "displayTitle": "Shaobo Zhang",
     "homeUrl": "https://ZS-robot.github.io",
-    "email": "<your-email@domain.com>",
+    "email": "YOUR_ACTUAL_EMAIL@domain.com",
     "startSite": "05/23/2026",
     "onePageListNum": 30,
     "singlePage": ["about", "events"],
@@ -16,5 +16,6 @@
     "urlMode": "issue",
     "showPostSource": 0,
     "rssSplit": "sentence",
-    "bottomText": "© 2026 Shaobo Zhang. All Rights Reserved."
+    "bottomText": "© 2026 Shaobo Zhang. All Rights Reserved.",
+    "script": "<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\\\(', '\\\\)']]}, svg: {fontCache: 'global'}};</script><script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js' async></script>"
 }
