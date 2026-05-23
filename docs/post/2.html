@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="en">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://gravatar.com/avatar/971c2b7cd1071321578c66ad55188802c3d68f1488a27756f1c159fc3d4eb3b2?v=1779490722000&size=256&d=initials"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# 矩阵与张量映射面面观：从基本子空间到抽象指标
+# Perspectives on Matrix and Tensor Mappings: From Fundamental Subspaces to Abstract Indices
+
+## 目录 / Table of Contents
+- [前言：为什么好奇这个问题？](前言：为什么好奇这个问题？)
+- [一、矩阵的基本子空间定理](#一矩阵的基本子空间定理)
+- [二、矩阵乘法面面观](#二矩阵乘法面面观)
+- [三、张量面面观](#三张量面面观)
+  - [3.">
+<meta property="og:title" content="矩阵与张量映射面面观(Perspectives on Matrix and Tensor Mappings)">
+<meta property="og:description" content="# 矩阵与张量映射面面观：从基本子空间到抽象指标
+# Perspectives on Matrix and Tensor Mappings: From Fundamental Subspaces to Abstract Indices
+
+## 目录 / Table of Contents
+- [前言：为什么好奇这个问题？](前言：为什么好奇这个问题？)
+- [一、矩阵的基本子空间定理](#一矩阵的基本子空间定理)
+- [二、矩阵乘法面面观](#二矩阵乘法面面观)
+- [三、张量面面观](#三张量面面观)
+  - [3.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ZS-robot.github.io/post/2.html">
+<meta property="og:image" content="https://gravatar.com/avatar/971c2b7cd1071321578c66ad55188802c3d68f1488a27756f1c159fc3d4eb3b2?v=1779490722000&size=256&d=initials">
+<title>矩阵与张量映射面面观(Perspectives on Matrix and Tensor Mappings)</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">矩阵与张量映射面面观(Perspectives on Matrix and Tensor Mappings)</h1>
+<div class="title-right">
+    <a href="https://ZS-robot.github.io" id="buttonHome" class="btn btn-invisible circle" title="home">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="switch theme">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>矩阵与张量映射面面观：从基本子空间到抽象指标</h1>
+<h1>Perspectives on Matrix and Tensor Mappings: From Fundamental Subspaces to Abstract Indices</h1>
+<h2>目录 / Table of Contents</h2>
+<ul>
+<li><a href="%E5%89%8D%E8%A8%80%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A5%87%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9F">前言：为什么好奇这个问题？</a></li>
+<li><a href="#%E4%B8%80%E7%9F%A9%E9%98%B5%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%AD%90%E7%A9%BA%E9%97%B4%E5%AE%9A%E7%90%86">一、矩阵的基本子空间定理</a></li>
+<li><a href="#%E4%BA%8C%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E9%9D%A2%E9%9D%A2%E8%A7%82">二、矩阵乘法面面观</a></li>
+<li><a href="#%E4%B8%89%E5%BC%A0%E9%87%8F%E9%9D%A2%E9%9D%A2%E8%A7%82">三、张量面面观</a>
+<ul>
+<li><a href="#31-%E7%AC%A6%E5%8F%B7%E8%A7%84%E5%AE%9A">3.1 符号规定</a></li>
+<li><a href="#32-%E7%BA%AF%E7%B2%B9%E6%98%A0%E5%B0%84%E7%9A%84%E8%A7%82%E7%82%B9">3.2 纯粹映射的观点</a></li>
+<li><a href="#33-%E5%88%97%E7%A9%BA%E9%97%B4%E8%A7%82%E7%82%B9">3.3 列空间观点</a></li>
+<li><a href="#34-%E7%BA%AF%E6%95%B0%E7%9A%84%E8%A7%82%E7%82%B9">3.4 纯数的观点</a></li>
+<li><a href="#35-%E8%A1%8C%E7%A9%BA%E9%97%B4%E7%9A%84%E8%A7%82%E7%82%B9">3.5 行空间的观点</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>前言：为什么好奇这个问题？</h2>
+<blockquote>
+<p>人类生来就有对某种特定认知框架的青睐，这导致即使是在数学上作用效果一致的对象，也需要以一种符合人类认知倾向的顺序进行解读，以达到方便对这种数学对象理解的作用。</p>
+</blockquote>
+<p>就我个人而言，一个箭头被映射到另一个空间的另一个箭头这个图像在我脑海中挥之不去（来自于3b1b的线性代数科普视频）。因此，我有着强烈的冲动，将矩阵运算的各种视角（来自于MIT的线性代数公开课，以线性代数四个基本空间定理为代表），以及微分几何中的张量的各种视角（来自梁灿彬老师的《微分几何与广义相对论》）统一于一段连续的推导中。</p>
+<p>我心中的几何对象是一个绝对的东西，映射也是绝对的。而所谓的基底只是一种测量工具，选一组基底对一个几何对象向量"测量"就会得到它在这个基底下的分量。因此，输入输出可以不单单是几何对象的向量，也可以是它们的不同测量下的表达。这就导致了，一个绝对的映射却有着好多种看法。</p>
+<p>如果读者没有相似的困惑，或者知识架构与我不同，那么可能这篇笔记并不适合你。下面是我用数学语言转化我上述思想的一些尝试。它需要更多的润色与修改，以期在未来成为一个更为自然、精简、连贯的笔记。</p>
+<hr>
+<h2>一、矩阵的基本子空间定理</h2>
+<blockquote>
+<p>对于任意矩阵 $M \in \mathbb{R}^{k \times n}$ ，假设其秩为 $r$ （其中 $r \le \min(k, n)$ ），其<strong>矩阵的基本子空间定理</strong>是？</p>
+</blockquote>
+<p>该定理揭示了矩阵作为一个线性映射，对定义域和值域空间的划分：</p>
+<ul>
+<li>
+<strong>定义域空间 $\mathbb{R}^n$ 的分解：</strong> 行空间 $C(M^T)$ 维数为 $r$ 。零空间 $N(M)$ 维数为 $n - r$ 。两者互为正交补： $C(M^T) = N(M)^\perp$ 。</li>
+<li>
+<strong>值域空间 $\mathbb{R}^k$ 的分解：</strong> 列空间 $C(M)$ 维数为 $r$ 。左零空间 $N(M^T)$ 维数为 $k - r$ 。两者互为正交补： $C(M) = N(M^T)^\perp$ 。</li>
+</ul>
+<hr>
+<h2>二、矩阵乘法面面观</h2>
+<blockquote>
+<p>矩阵乘法 $y=Ax, A \in m \times n$ 的多个视角。</p>
+</blockquote>
+<p>针对最基本的矩阵乘法，在此统一框架下，可以自然衍生出以下四种不同层次的理解：</p>
+<ol>
+<li>
+<strong>列空间观：</strong> 可视 $x$ 为 $A$ 列向量所构成向量组中的一组分量。</li>
+<li>
+<strong>全局映射观：</strong> 可视 $x$ 为 $\mathcal{R}^n$ 空间任意可能的一个向量，被 $A$ 线性映射到 $A$ 的列空间得到向量 $y$ 。</li>
+<li>
+<strong>行空间观：</strong> 可视 $x$ 为 $\mathcal{R}^n$ 任意可能的一个向量，而 $A$ 的行空间可视为 $\mathcal{R}^n$ 空间的一个线性子空间（与 $A$ 的零空间正交）。则 $y$ 被视为分量，由 $x$ 与 $A$ 的行向量组取内积得到。</li>
+<li>
+<strong>数数观：</strong> 所谓线性映射，就是一组数到另一组数的线性映射……</li>
+</ol>
+<p>之所以能“冒出”如此多的看法，关键点在于，我始终认为"向量"是由"基底"和"数"组成的。一个"向量"和一堆"数"终究不可以是一个东西。所以，能否找到一个统一的框架，顺畅的让我们找到上面这四种视角的统一性呢？沿着这一思路，我们自然引入了张量的度量体系。</p>
+<hr>
+<h2>三、张量面面观</h2>
+<p>为了获得一个完全独立于坐标且足够普适的描述，以下采用抽象指标。</p>
+<h3>3.1 符号规定</h3>
+<ul>
+<li>空间设定： 设 $V$ 和 ${V'}$ 为域 $\mathbb{R}$ 上的抽象向量空间，维度分别为 $n$ 和 $m$ 。</li>
+<li>抽象指标： 采用拉丁字母 $a, b, c, d$ 表示抽象指标，用以标记纯粹几何实体的张量性质，不依赖于任何坐标系或基底。</li>
+<li>输入输出： 输入向量记为 $v^a \in V$ ，输出向量记为 ${v'}^b \in {V'}$ 。</li>
+<li>映射张量： 几何线性映射由驻扎在 ${V'} \otimes V^*$ 中的混合张量 $A^b{}_a$ 唯一确定。</li>
+<li>原空间基底与对偶基底： 在 $V$ 中选取基底 $e_\mu{}^a$ 。其对偶基底 $e^\mu{}<em>a \in V^*$ 严格定义为满足双正交条件的泛函： $e^\mu{}<em>a e</em>\nu{}^a = \delta^\mu</em>\nu$ 。由此导出 $V$ 的完备性恒等张量： $\delta^a_c = e_\mu{}^a e^\mu{}_c$ 。</li>
+<li>像空间基底与对偶基底： 同理，在 ${V'}$ 中选取基底 ${e'}<em>\nu{}^b$ ，其对偶基底为 ${e'}^\nu{}<em>b \in {V'}^*$ ，满足 ${e'}^\nu{}<em>b {e'}</em>\sigma{}^b = \delta^\nu</em>\sigma$ 以及 ${\delta'}^b_c = {e'}</em>\nu{}^b {e'}^\nu{}_c$ 。</li>
+<li>坐标与矩阵元： 向量的分量严格定义为用对偶基底测量的纯数： $x^\mu \equiv e^\mu{}_a v^a$ ， $y^\nu \equiv {e'}^\nu{}_b {v'}^b$ 。<br>
+映射张量 $A^b{}<em>a$ 在该组基底下的矩阵元严格定义为双向投影析出的标量阵列： $A^\nu{}</em>\mu \equiv {e'}^\nu{}_b A^b{}<em>a e</em>\mu{}^a$ 。</li>
+</ul>
+<h3>3.2 纯粹映射的观点</h3>
+<blockquote>
+<p><strong>🔗 演化路径：</strong> 向量 (纯粹的几何对象) $\to$ 映射 (只能用它的映射性质作为表达...因为没有能描述它的"测量"结果) $\to$ 向量 (纯粹的几何对象)</p>
+</blockquote>
+<p>是一个独立于任何观测工具的线性映射：<br>
+${v'}^b = A^b{}_a v^a$</p>
+<p>在此视角下，输入是几何客体，输出是几何客体，映射是纯粹的几何算子，不涉及任何数字运算。</p>
+<h3>3.3 列空间观点</h3>
+<blockquote>
+<p><strong>🔗 演化路径：</strong> 原空间的观测值 (一坨数) $\to$ 映射 (此处规则可以描述的确切些：1.基底有推前映射，这部分至多只能用它的映射性质定义。2. 将推前映射基底与输入的观测值也就是坐标分量线性组合起来，这可以用矩阵乘法作为一种描述方式) $\to$ 目标空间的向量</p>
+</blockquote>
+<p><strong>推导与介绍：</strong><br>
+输入端利用基底将 $v^a$ 展开为 $x^\mu e_\mu{}^a$ ：<br>
+${v'}^b = A^b{}<em>a (x^\mu e</em>\mu{}^a)$</p>
+<p>于是通过线性组合律，结构重组为：<br>
+${v'}^b = x^\mu (A^b{}<em>a e</em>\mu{}^a)$</p>
+<p>关注几何对象 $A^b{}<em>a e</em>\mu{}^a$ 。它具有极明确的意义：它是 $V$ 空间的基向量组 $e_\mu{}^a$ 经推前映射后在 ${V'}$ 空间中形成的新向量组。我们将这组向量定义为“列空间上的向量”。在这个意义上，列空间是象空间的一个"子空间"。</p>
+<p>于是，我们可以得到列空间观点：输出向量 ${v'}^b$ 本质上是以输入向量的纯数坐标 $x^\mu$ 为权值，对推前基底向量簇 $A^b{}<em>a e</em>\mu{}^a$ 进行的线性组合。</p>
+<p><strong>与映射张量的系数矩阵的关联：</strong><br>
+为了看清推前基底在目标坐标系下的长相，我们在等式两侧再次作用 ${V'}^*$ 的对偶基底 ${e'}^\nu{}_b$ 。此时，我们孤立地考察第 $j$ 个推前基底向量 $A^b{}_a e_j{}^a$ 。<br>
+${e'}^\nu{}_b (A^b{}_a e_j{}^a) = A^\nu{}_j$</p>
+<p>纯数 $A^\nu{}_j$ （固定下指标 $j$ ，遍历上指标 $\nu$ ）在代数上正是矩阵 $A$ 的第 $j$ 列。因此，所谓矩阵的“列向量”，是 $V$ 中第 $j$ 个基底经推前映射，在 ${V'}$ 基底下的分量表达。</p>
+<h3>3.4 纯数的观点</h3>
+<blockquote>
+<p><strong>🔗 演化路径：</strong> 以原空间基底观测向量的值 $\to$ 映射 (此处表现为一个数值的分量矩阵) $\to$ 像空间以其基底观测得到的值</p>
+</blockquote>
+<p>顺延列空间的推导，若我们不孤立考察单个推前基底，而是考虑数值坐标的变化，即在等式两侧作用 ${V'}^*$ 的对偶基底 ${e'}^\nu{}_b$ ：<br>
+$y^\nu \equiv {e'}^\nu{}_b {v'}^b = {e'}^\nu{}_b (A^b{}<em>a e</em>\mu{}^a) x^\mu$ 。</p>
+<p>利用矩阵元的分量定义 $A^\nu{}_\mu \equiv {e'}^\nu{}<em>b A^b{}<em>a e</em>\mu{}^a$ ，等式就没有几何意义上的"绝对性"，转换为纯数字上的映射：<br>
+$y^\nu = A^\nu{}</em>\mu x^\mu$</p>
+<p>所谓线性映射，在此视角下，变为由一坨数到另一坨数字的映射。这正是我们在基础线性代数计算中最常依赖的形态。</p>
+<h3>3.5 行空间的观点</h3>
+<blockquote>
+<p><strong>🔗 演化路径：</strong> 向量 (作为几何对象) $\to$ 映射 (1. 一个只能用性质描述的，目标空间对偶基底到原对偶空间的拉回映射。 2.拉回映射作为线性算子作用于输入向量的规则，可以用矩阵乘法描述 ) $\to$ 目标空间向量被基底测量的值</p>
+</blockquote>
+<p><strong>推导与介绍：</strong><br>
+我们要孤立地获取目标向量在特定维度 $i$ 上的纯数观测值 $y^i$ ，我们需要让目标空间的第 $i$ 个对偶基底（线性泛函） ${e'}^i{}_b$ 作用于输出客体。<br>
+$y^i = {e'}^i{}_b {v'}^b = {e'}^i{}_b (A^b{}_a v^a)$</p>
+<p>根据张量缩并的结合律，我们改变运算优先级：不让算子先作用于输入向量，而是让目标观测优先与映射算子结合：<br>
+$y^i = ({e'}^i{}_b A^b{}_a) v^a$</p>
+<p>聚焦括号内的几何对象 ${e'}^i{}_b A^b{}_a$ 。由于它带有一个自由的输入空间下指标 $a$ ，它在数学上已脱离了目标空间，成为了原对偶空间 $V^*$ 中的一个线性泛函（即拉回对偶基）。这就是无坐标框架下的“行向量”。</p>
+<p><strong>与系数矩阵的关联：</strong><br>
+为了将其对应回具体的数值计算，我们利用完备性恒等张量进行展开：<br>
+${e'}^i{}_b A^b{}_a = ({e'}^i{}_b A^b{}_c) \delta^c_a = ({e'}^i{}_b A^b{}<em>c) (e</em>\mu{}^c e^\mu{}_a) = ({e'}^i{}_b A^b{}<em>c e</em>\mu{}^c) e^\mu{}_a$</p>
+<p>依据分量矩阵的定义，括号内的纯数部分严格等于 $A^i{}_\mu$ ：<br>
+${e'}^i{}_b A^b{}<em>a = A^i{}</em>\mu e^\mu{}_a$ 。</p>
+<p>这个纯数序列 $A^i{}_\mu$ （固定上指标 $i$ ，遍历下指标 $\mu$ ）就对应分量系数矩阵 $A$ 的第 $i$ 行。于是，行空间观点就自然过渡到纯数映射了。</p>
+<hr>
+<h3>3.6 核心机理总结：输入-映射-输出</h3>
+<p>基于上述推演，映射在不同测量视角下的数学等价性与物理意义转换可严格归纳为下表：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">理论视角</th>
+<th align="left">输入端 (Input)</th>
+<th align="left">映射算子 (Mapping Operator)</th>
+<th align="left">输出端 (Output)</th>
+<th align="left">核心结构等式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><strong>纯粹映射</strong></td>
+<td align="left">纯粹几何对象：<br>$v^a$
+</td>
+<td align="left">纯粹算子：<br>$A^b{}_a$
+</td>
+<td align="left">纯粹几何对象：<br>${v'}^b$
+</td>
+<td align="left">${v'}^b = A^b{}_a v^a$</td>
+</tr>
+<tr>
+<td align="left"><strong>列空间观</strong></td>
+<td align="left">原空间数值坐标：<br>$x^\mu$
+</td>
+<td align="left">推前基底向量簇：<br>$A^b{}<em>a e</em>\mu{}^a$</td>
+<td align="left">目标空间向量：<br>${v'}^b$
+</td>
+<td align="left">${v'}^b = x^\mu (A^b{}<em>a e</em>\mu{}^a)$</td>
+</tr>
+<tr>
+<td align="left"><strong>行空间观</strong></td>
+<td align="left">纯粹几何对象：<br>$v^a$
+</td>
+<td align="left">目标对偶基的拉回映射：<br>${e'}^i{}_b A^b{}_a$
+</td>
+<td align="left">目标特定维度的测量值：<br>$y^i$
+</td>
+<td align="left">$y^i = ({e'}^i{}_b A^b{}_a) v^a$</td>
+</tr>
+<tr>
+<td align="left"><strong>纯数与矩阵</strong></td>
+<td align="left">原空间数值坐标：<br>$x^\mu$
+</td>
+<td align="left">坐标分量矩阵：<br>$A^\nu{}_\mu$
+</td>
+<td align="left">目标空间数值坐标：<br>$y^\nu$
+</td>
+<td align="left">$y^\nu = A^\nu{}_\mu x^\mu$</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table></div>
+<div style="font-size:small;margin-top:8px;float:right;">© 2026 Shaobo Zhang. All Rights Reserved.</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">comments</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://ZS-robot.github.io">Shaobo Zhang</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("05/23/2026"!=""){
+    var startSite=new Date("05/23/2026");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="run "+diffDay+" day(s)"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","ZS-robot/ShaoboZhang");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}, svg: {fontCache: 'global'}};</script><script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js' async></script><script>MathJax = {tex: {inlineMath: [["$", "$"]]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</html>
